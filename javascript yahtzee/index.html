@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Yahtzee</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <button id="btnGooi">Gooien!</button>
+    <p>Je hebt de volgende dobbelstenen gegooid:</p>
+    <table id="dobbelstenen">
+        <tr>
+            <td class="dobbelsteen">1</td>
+            <td class="dobbelsteen">2</td>
+            <td class="dobbelsteen">3</td>
+            <td class="dobbelsteen">4</td>
+            <td class="dobbelsteen">5</td>
+        </tr>
+    </table>
+    
+    <h1>Scoreblok</h1>
+    <table id="scoreblok">
+        <tr>
+            <th>Deel 1</th>
+            <th>Puntentelling</th>
+            <th>Spel 1</th>
+            <th>Spel 2</th>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Enen</td>
+            <td class="deel1 puntentelling">Tel alle enen</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Tweeën</td>
+            <td class="deel1 puntentelling">Tel alle tweeën</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Drieën</td>
+            <td class="deel1 puntentelling">Tel alle drieën</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Vieren</td>
+            <td class="deel1 puntentelling">Tel alle vieren</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Vijven</td>
+            <td class="deel1 puntentelling">Tel alle vijven</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel1 worp">Zessen</td>
+            <td class="deel1 puntentelling">Tel alle zessen</td>
+            <td class="deel1 score spel1"></td>
+            <td class="deel1 score spel2"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Totaal aantal punten</td>
+            <td class="score ptVoorBonus spel1"></td>
+            <td class="score ptVoorBonus spel2"></td>
+        </tr>
+        <tr>
+            <td>Bonus <br> <i>bij 63 of meer</i></td>
+            <td class="puntentelling">35 pt</td>
+            <td class="score bonus spel1"></td>
+            <td class="score bonus spel2"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Totaal bovenste helft</td>
+            <td class="score ptDeel1 spel1"></td>
+            <td class="score ptDeel1 spel2"></td>
+        </tr>
+        <tr>
+            <th colspan="2"> Deel 2</th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Three of a kind <br> <i>3 dezelfde</i></td>
+            <td class="deel2 puntentelling">Totaal v.d 5 stenen</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Carré <br> <i>4 dezelfde</i></td>
+            <td class="deel2 puntentelling">Totaal v.d 5 stenen</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Full house <br> <i>3+2 dezelfde</i></td>
+            <td class="deel2 puntentelling">25 pt</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Kleine straat <br> <i>4 opeenvolgend</i></td>
+            <td class="deel2 puntentelling">30 pt</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Grote straat <br> <i>5 opeenvolgend</i></td>
+            <td class="deel2 puntentelling">40 pt</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Yahtzee <br> <i>5 dezelfde</i></td>
+            <td class="deel2 puntentelling">50 pt</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td class="deel2 worp">Chance <br> <i>vrije keus</i></td>
+            <td class="deel2 puntentelling">Totaal v.d 5 stenen</td>
+            <td class="deel2 score spel1"></td>
+            <td class="deel2 score spel2"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Totaal onderste helft</td>
+            <td class="score ptDeel2 spel1"></td>
+            <td class="score ptDeel2 spel2"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Totaal bovenste helft</td>
+            <td class="score ptDeel1 spel1"></td>
+            <td class="score ptDeel1 spel2"></td>
+        </tr>
+        <tr>
+            <th colspan="2">Totaal generaal</th>
+            <td class="score ptTotaal spel1"></td>
+            <td class="score ptTotaal spel2"></td>
+        </tr>
+    </table>
+
+    <script src="script.js"></script>  
+</body>
+</html>
