@@ -9,7 +9,7 @@ const dice = ref([]);
 <template>
     <h1>Yahtzee!</h1>
     <ThrownDice v-model="dice" />
-    <ScoreTable />
+    <ScoreTable v-model="dice" />
 </template>
 
 <style scoped></style>
