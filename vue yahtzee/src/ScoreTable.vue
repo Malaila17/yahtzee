@@ -48,8 +48,8 @@ const checkStreet = (streetLength) => {
     return false;
 }
 
-const threeOfAKind = computed(() => checkSame(3) ? sumOfDice : 0);
-const carre = computed(() => checkSame(4) ? sumOfDice : 0);
+const threeOfAKind = computed(() => checkSame(3) ? sumOfDice.value : 0);
+const carre = computed(() => checkSame(4) ? sumOfDice.value : 0);
 const yahtzee = computed(() => checkSame(5) ? 50 : 0);
 const kleineStraat = computed(() => checkStreet(4) ? 30 : 0);
 const groteStraat = computed(() => checkStreet(5) ? 40 : 0);
@@ -62,7 +62,21 @@ const fullHouse = computed(() => {
     return 25;
 });
 
+const scoresPart1 = computed(() => {
+    const scores = []
+    for (let num in count.value){
+        scores.push(count.value[num] * num);
+    }
+    return scores    
+});
 const scoresPart2 = [threeOfAKind, carre, fullHouse, kleineStraat, groteStraat, yahtzee, sumOfDice];
+const totalBottom = computed(() => threeOfAKind.value + carre.value + fullHouse.value + kleineStraat.value + groteStraat.value + yahtzee.value + sumOfDice.value);
+const totalTopNoBonus = computed(() => {
+    return scoresPart1.value.reduce((sum, die) => sum + die, 0);
+});
+// const totalBottom = computed(() => {
+//     return scoresPart2.reduce((sum, die) => sum + die, 0);
+// });
 
 const numerals = ['enen', 'tweeën', 'drieën', 'vieren', 'vijven', 'zessen'];
 const namesPart2 = [
@@ -92,7 +106,6 @@ const scoreGuidePart2 = [
     "50 pt",
     "Totaal v.d 5 stenen",
 ]
-
 </script>
 
 <template>
@@ -107,13 +120,14 @@ const scoreGuidePart2 = [
         <tr v-for="(numeral, index) in numerals" :key="index">
             <td>{{ numeral[0].toUpperCase() }}{{ numeral.slice(1) }}</td>
             <td>Tel alle {{ numeral }}</td>
-            <td>{{ count[index + 1] * (index + 1) }}</td>
+            <!-- <td>{{ count[index + 1] * (index + 1) }}</td> -->
+            <td>{{ scoresPart1[index] }}</td>
             <td></td>
         </tr>
         <tr>
             <td colspan="2">Totaal aantal punten</td>
-            <td class="score ptVoorBonus spel1"></td>
-            <td class="score ptVoorBonus spel2"></td>
+            <td>{{ totalTopNoBonus }}</td>
+            <td></td>
         </tr>
         <tr>
             <td>
@@ -121,17 +135,18 @@ const scoreGuidePart2 = [
                 <br>
                 <i>bij 63 of meer</i>
             </td>
-            <td class="puntentelling">35 pt</td>
-            <td class="score bonus spel1"></td>
-            <td class="score bonus spel2"></td>
+            <td>35 pt</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td colspan="2">Totaal bovenste helft</td>
-            <td class="score ptDeel1 spel1"></td>
-            <td class="score ptDeel1 spel2"></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <th colspan="2">Deel 2</th>
+            <th>Deel 2</th>
+            <th>Puntentelling</th>
             <td></td>
             <td></td>
         </tr>
@@ -143,18 +158,18 @@ const scoreGuidePart2 = [
         </tr>
         <tr>
             <td colspan="2">Totaal onderste helft</td>
-            <td class="score ptDeel2 spel1"></td>
-            <td class="score ptDeel2 spel2"></td>
+            <td>{{ totalBottom }}</td>
+            <td></td>
         </tr>
         <tr>
             <td colspan="2">Totaal bovenste helft</td>
-            <td class="score ptDeel1 spel1"></td>
-            <td class="score ptDeel1 spel2"></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <th colspan="2">Totaal generaal</th>
-            <td class="score ptTotaal spel1"></td>
-            <td class="score ptTotaal spel2"></td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
 </template>
