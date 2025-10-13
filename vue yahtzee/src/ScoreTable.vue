@@ -3,7 +3,7 @@ import {computed} from 'vue';
 const dice = defineModel();
 
 const count = computed(() => {
-    const count_ = {
+    const count = {
         1: 0,
         2: 0,
         3: 0,
@@ -13,9 +13,9 @@ const count = computed(() => {
     };
 
     for (let i = 0; i < dice.value.length; i++) {
-        count_[dice.value[i]]++;
+        count[dice.value[i]]++;
     }
-    return count_;
+    return count;
 });
 
 const sumOfDice = computed(() => {
@@ -49,6 +49,7 @@ const checkStreet = streetLength => {
 };
 
 const threeOfAKind = computed(() => (checkSame(3) ? sumOfDice.value : 0));
+
 const carre = computed(() => (checkSame(4) ? sumOfDice.value : 0));
 const yahtzee = computed(() => (checkSame(5) ? 50 : 0));
 const kleineStraat = computed(() => (checkStreet(4) ? 30 : 0));
